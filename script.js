@@ -2,9 +2,10 @@
 let captchaText = document.querySelector('#captcha');
 var ctx = captchaText.getContext("2d");
 let userText = document.querySelector('#textBox');
-let submitButton = document.querySelector('#submitButton');
 let output = document.querySelector('#output');
-let refreshButton = document.querySelector('#refreshButton');
+
+let phone_number=document.querySelector('#phone');
+let phone_label=document.querySelector('#tlf');
 
 ctx.font = "30px Roboto";
 ctx.fillStyle = "#08e5ff";
@@ -22,44 +23,70 @@ for (let i = 1; i <= 7; i++) {
 var c = emptyArr.join('');
 ctx.fillText(emptyArr.join(''),captchaText.width/4, captchaText.height/2);
 
-// This event listener is stimulated whenever the user press the "Enter" button
-// "Correct!" or "Incorrect, please try again" message is
-// displayed after validating the input text with CAPTCHA
-userText.addEventListener('keyup', function(e) {
-    // Key Code Value of "Enter" Button is 13
-    if (e.keyCode === 13) {
-        if (userText.value === c) {
-            output.classList.add("correctCaptcha");
-            output.innerHTML = "Correct!";
-        } else {
-            output.classList.add("incorrectCaptcha");
-            output.innerHTML = "Incorrect, please try again";
-        }
-    }
-});
-// This event listener is stimulated whenever the user clicks the "Submit" button
-// "Correct!" or "Incorrect, please try again" message is
-// displayed after validating the input text with CAPTCHA
-submitButton.addEventListener('click', function() {
-    if (userText.value === c) {
+
+
+
+function validate()
+{
+
+let response,c1,c2;  
+let ph_number= Number(phone_number.value);
+let control=phone_number.value.indexOf(".");
+let control2=phone_number.value.indexOf(",");
+
+
+
+//We ask that the phone introduced was a number 
+if(isNaN(ph_number)===true || (control>0 || control2>0) )
+{
+c1=false;
+phone_label.style.color="Red";
+phone_label.innerHTML = "Error, el telefono tiene que ser un numero entero";
+}else
+{
+c1=true;
+phone_label.style.color="#7FFF00";
+phone_label.innerHTML = "!Correcto¡";
+}
+
+//We ask for the capcha introduced
+ if (userText.value === c) {
         output.classList.add("correctCaptcha");
-        output.innerHTML = "Correct!";
+        output.innerHTML = "!Correcto¡";
+        c2=true;
     } else {
         output.classList.add("incorrectCaptcha");
-        output.innerHTML = "Incorrect, please try again";
+        output.innerHTML = "Error, introduzca bien el capcha";
+        c2=false;
     }
-   
-});
-// This event listener is stimulated whenever the user press the "Refresh" button
-// A new random CAPTCHA is generated and displayed after the user clicks the "Refresh" button
-refreshButton.addEventListener('click', function() {
-    userText.value = "";
-    let refreshArr = [];
-    for (let j = 1; j <= 7; j++) {
-        refreshArr.push(alphaNums[Math.floor(Math.random() * alphaNums.length)]);
-    }
-    ctx.clearRect(0, 0, captchaText.width, captchaText.height);
-    c = refreshArr.join('');
-    ctx.fillText(refreshArr.join(''),captchaText.width/4, captchaText.height/2);
-    output.innerHTML = "";
-});
+
+//Once all the data is ok , we make a final decision
+if(c1==true && c2==true)
+{
+
+response=true;
+
+}else
+{
+
+response=false;
+}
+
+console.log("la respuesta es:"+response);
+
+
+
+return response;
+}
+
+
+
+
+/* Cambios realizados 20-09-2022 , 7:28 pm 
+
+1)Eliminacion de los botones y eventos que tiene el capcha al presionar enter
+2)
+
+
+
+*/ 

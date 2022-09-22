@@ -14,38 +14,42 @@
      </h1>
 
 
-<form action="#" class="formstyle" onsubmit="validate()">
+<form action="#" class="formstyle" onsubmit="return validate()">
 
-<label for="fname">Nombre</label>
+<label for="fname" >Nombre</label>
 <input type="text" id="fname" required>
 <label for="lname">Apellido</label>
 <input type="text" id="lname" required>
 <label for="email">Email</label>
 <input type="email" id="email" required>
-<label for="phone">Telefono</label>
-<input type="text" id="phone" required>
+<label for="phone" id="tlf" >Telefono</label>
+<input type="text" id="phone" required maxlength="11">
 <label for="message">Mensaje</label>
-<textarea name="message" id="message" cols="30" rows="10" required></textarea>
+<textarea name="message" id="message" maxlength="400" required></textarea>
+
+<label for="textBox">Porfavor introduzca las letras de la imagen</label>
 <div class="center">
 
     <div id="captchaBackground">
     
         <canvas id="captcha">captcha text</canvas>
         <input id="textBox" type="text" name="text" required>
-        <div id="buttons">
-            <!--<input id="submitButton" type="submit">-->
-            <button id="submitButton" >Refresh</button>
-            <button id="refreshButton">Refresh</button>
-        </div>
+        
         <span id="output"></span>
         
     </div>
     
 </div>
-<input type="submit" value="enviar">
+<input type="submit" id="submit_button" value="enviar">
 
 </form>
 
  <script src="script.js"></script>
 </body>
 </html>
+
+<!---Cambios efectuados 20-9-2022 , 7:25 am :
+Linea 36 (elimine todos los botones del capcha al ser inneserarios)
+
+
+-->

@@ -11,9 +11,15 @@ body
    display: flex;
     flex-direction: column;
     align-items: center;
+    color: #fff;
+    border: medium dashed green;
 }
 
-
+#message
+{
+    resize:none;
+    margin-bottom: 1em;
+}
 
 #captchaBackground {
     height: 220px;
